@@ -1,157 +1,359 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>موقع الاختبارات</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #080808;
-      color:#ffffff;
-      margin: 0;
-      padding: 30px 15px;
-    }
-    .quiz {
-      max-width: 550px;
-      margin: auto;
-      background: #171717;
-      color:ffffff;
-      padding: 25px;
-      border-radius: 16px;
-      border: 1xp solid #333333;
-      box-shadow: 0 4px 15px #00000066;
-    }
-    h1 { color: #60a5fa; }
-    .option {
-      display: block;
-      width: 100%;
-      padding: 14px;
-      margin: 10px 0;
-      border: 1px solid #444444;
-      border-radius: 9px;
-      background: #252525;
-      color: #ffffff;
-      cursor: pointer;
-      text-align: right;
-      font-size: 17px;
-    }
-    .option:hover { background: #333333; }
-    #message { font-weight: bold; }
-    #next {
-      display: none;
-      padding: 12px 22px;
-      background: #175cd3;
-      color: white;
-      border: 0;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>اختبر معلوماتك | Python & Computer Basics</title>
+<style>
+*{box-sizing:border-box}
+:root{color-scheme:dark}
+body{
+  margin:0;min-height:100vh;padding:24px 14px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:Tahoma,Arial,sans-serif;color:#edf3ff;
+  background:radial-gradient(ellipse at top,#172554 0%,transparent 55%),#080d18;
+}
+.quiz{
+  width:100%;max-width:760px;padding:clamp(18px,4vw,32px);
+  border:1px solid #293954;border-radius:24px;
+  background:rgba(17,27,46,.97);box-shadow:0 22px 70px #0008
+}
+.brand{text-align:center;margin-bottom:25px}
+.brand-icon{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:62px;height:62px;border-radius:19px;
+  background:linear-gradient(135deg,#3b82f6,#8b5cf6);
+  font-size:30px;box-shadow:0 8px 25px #3b82f644;margin-bottom:12px
+}
+h1{font-size:clamp(23px,5vw,30px);margin:0 0 8px;color:#fff}
+.subtitle{color:#9aabc5;margin:0;font-size:14px;line-height:1.8}
+.stats{
+  display:flex;justify-content:space-between;gap:12px;
+  margin:24px 0 12px;color:#cbd5e1;font-size:14px
+}
+.progress-track{
+  height:8px;background:#263349;border-radius:20px;
+  overflow:hidden;margin-bottom:25px
+}
+.progress-fill{
+  height:100%;width:0;
+  background:linear-gradient(90deg,#3b82f6,#a78bfa);
+  border-radius:20px;transition:width .3s
+}
+.question-card{
+  background:#111d31;border:1px solid #2c3b54;
+  border-radius:17px;padding:22px;margin-bottom:18px
+}
+.question-label{color:#7db7ff;font-size:13px;font-weight:bold;margin-bottom:12px}
+#question{
+  color:#f8fafc;font-size:clamp(18px,3.5vw,21px);
+  line-height:1.75;margin:0;direction:ltr;text-align:left;overflow-wrap:anywhere
+}
+#options{display:grid;gap:11px}
+.option{
+  display:flex;align-items:flex-start;gap:12px;width:100%;padding:14px;
+  border:1px solid #334155;border-radius:13px;
+  background:#17243a;color:#e2e8f0;cursor:pointer;
+  text-align:left;direction:ltr;font-size:15px;line-height:1.65;transition:.18s
+}
+.option:hover:not(:disabled){
+  border-color:#60a5fa;background:#1e3150;transform:translateY(-1px)
+}
+.option:focus-visible,.next:focus-visible{outline:2px solid #93c5fd;outline-offset:3px}
+.option:disabled{cursor:default;opacity:1}
+.letter{
+  flex-shrink:0;width:30px;height:30px;
+  display:inline-flex;align-items:center;justify-content:center;
+  border-radius:9px;background:#263750;color:#bfdbfe;font-weight:bold
+}
+.option.correct{border-color:#22c55e;background:#123527;color:#dcfce7}
+.option.correct .letter{background:#166534;color:white}
+.option.wrong{border-color:#f87171;background:#3b2028;color:#fee2e2}
+.option.wrong .letter{background:#991b1b;color:white}
+#message{min-height:24px;font-weight:bold;text-align:center;margin:18px 0}
+.next{
+  display:none;width:100%;padding:15px;border:0;border-radius:13px;
+  background:linear-gradient(135deg,#2563eb,#7c3aed);
+  color:#fff;font-size:16px;font-weight:bold;cursor:pointer
+}
+.next:hover{filter:brightness(1.12)}
+.footer{text-align:center;color:#71819b;font-size:12px;margin-top:22px}
+.result{text-align:center;padding:12px 0}
+.result-icon{font-size:62px;margin-bottom:12px}
+.result-score{font-size:clamp(30px,7vw,40px);color:#93c5fd;margin:22px 0}
+.result p{color:#cbd5e1;line-height:1.9}
+.result .next{display:block;margin-top:22px}
+@media(max-width:480px){
+  body{padding:12px 8px}
+  .quiz{border-radius:18px;padding:18px 13px}
+  .question-card{padding:17px}
+  .option{padding:12px;font-size:14px}
+}
+</style>
 </head>
 <body>
-  <div class="quiz">
-    <h1>اختبارك</h1>
-    <p id="progress"></p>
-    <h3 id="question"></h3>
-    <div id="options"></div>
-    <p id="message"></p>
-    <button id="next" onclick="nextQuestion()">
-      السؤال التالي
-    </button>
+
+<main class="quiz" id="quiz">
+  <header class="brand">
+    <div class="brand-icon">🧠</div>
+    <h1>اختبر معلوماتك</h1>
+    <p class="subtitle">
+      أساسيات الكمبيوتر ولغة Python<br>
+      ركّز في كل سؤال واختار أفضل إجابة!
+    </p>
+  </header>
+
+  <div class="stats">
+    <span id="progress">السؤال 1</span>
+    <span id="score">النتيجة: 0</span>
   </div>
 
-  <script>
-    // أضف أسئلتك هنا
-    const questions = [
-      {
-        q: ".... is the physical aspect of the compter that can be seen.",
-        options: ["Softwaer", "Hardware", "operating system", "Application program"],
-        answer: 1
-      },
-      {
-        q: ".... is the brain of a computer",
-        options: ["Hardware", "Memory", "CPU", "Disk"],
-        answer: 2
-      },
-      {
-        q: "Why do computer use zeros and ones?",
-        options: ["becaus combinations of zeros and ones can represent any numbers and characters", "because binary numbers are simplest", "because digital devices have two stable states and it is natural to use one state for 0 and the other for 1", "0"],
-        answer: 2
-      }
-    ];
+  <div class="progress-track">
+    <div class="progress-fill" id="progressFill"></div>
+  </div>
 
-    let current = 0;
-    let score = 0;
-    let answered = false;
+  <section class="question-card">
+    <div class="question-label">✦ السؤال الحالي</div>
+    <h2 id="question"></h2>
+  </section>
 
-    function showQuestion() {
-      answered = false;
-      document.getElementById("message").textContent = "";
-      document.getElementById("next").style.display = "none";
-      document.getElementById("progress").textContent =
-        `السؤال ${current + 1} من ${questions.length}`;
+  <section id="options" aria-label="الاختيارات"></section>
+  <p id="message" aria-live="polite"></p>
 
-      const item = questions[current];
-      document.getElementById("question").textContent = item.q;
-      const box = document.getElementById("options");
-      box.innerHTML = "";
+  <button class="next" id="next" type="button" onclick="nextQuestion()">
+    السؤال التالي ←
+  </button>
 
-      item.options.forEach((option, index) => {
-        const button = document.createElement("button");
-        button.className = "option";
-        button.textContent = option;
-        button.onclick = () => checkAnswer(index);
-        box.appendChild(button);
-      });
+  <footer class="footer">اختبار تفاعلي • بالتوفيق 🚀</footer>
+</main>
+
+<script>
+const questions = [
+  {
+    q: "Which CIA principle is primarily concerned with preventing unauthorized people from reading private information?",
+    options: [
+      "Integrity",
+      "Availability",
+      "Confidentiality",
+      "All three principles equally"
+    ],
+    answer: 2
+  },
+  {
+    q: "The term 'malware' is a combination of which two words?",
+    options: [
+      "Malicious and ware",
+      "Malfunction and ware",
+      "Malicious and software",
+      "Malfunction and software"
+    ],
+    answer: 2
+  },
+  {
+    q: "After installing a free program, a student begins seeing unexpected and unwanted advertisements. Which threat best matches this symptom?",
+    options: [
+      "Adware",
+      "Rootkit",
+      "Worm",
+      "Ransomware"
+    ],
+    answer: 0
+  },
+  {
+    q: "Which feature most clearly distinguishes the worm described in the lecture from a computer virus?",
+    options: [
+      "It must be hidden inside a fake antivirus installer",
+      "It spreads between computers without user intervention",
+      "It only records what a user types",
+      "It always demands payment to unlock files"
+    ],
+    answer: 1
+  },
+  {
+    q: "Malicious software secretly collects login details and sends them to an outside party. Which threat does this describe?",
+    options: [
+      "Spyware",
+      "Adware",
+      "Ransomware",
+      "Computer worm"
+    ],
+    answer: 0
+  },
+  {
+    q: "A fake antivirus installer looks like a normal program but secretly gives an attacker access to a computer. It does not copy itself. What type of threat is it?",
+    options: [
+      "Computer worm",
+      "Adware",
+      "Computer virus",
+      "Trojan Horse"
+    ],
+    answer: 3
+  },
+  {
+    q: "An attacker abuses a legitimate operating-system command-line tool to collect information. Which threat category best fits this activity?",
+    options: [
+      "Computer worm",
+      "Adware",
+      "Fileless malware",
+      "Computer virus"
+    ],
+    answer: 2
+  },
+  {
+    q: "A student's grade is changed without permission, but teachers can still open the record. Which CIA principle is directly violated?",
+    options: [
+      "Confidentiality",
+      "Integrity",
+      "Availability",
+      "No CIA principle"
+    ],
+    answer: 1
+  },
+  {
+    q: "A fake antivirus app provides entry, a rootkit maintains hidden access, spyware captures passwords, and ransomware locks files. What does this example show?",
+    options: [
+      "Only the Trojan Horse creates a security problem",
+      "Every threat in the chain copies itself between computers",
+      "The entire chain affects only Integrity",
+      "Several threats can work together and affect different CIA principles"
+    ],
+    answer: 3
+  },
+  {
+    q: "A company restores locked files from a safe backup after ransomware, but the attacker still threatens to publish private information. What is the most accurate assessment?",
+    options: [
+      "Restoring file access also guarantees private information is safe",
+      "Ransomware can threaten Availability but never Confidentiality",
+      "Threatening disclosure affects only Integrity",
+      "Availability may be restored while Confidentiality remains at risk"
+    ],
+    answer: 3
+  }
+];
+
+let current = 0;
+let score = 0;
+let answered = false;
+const letters = ["A", "B", "C", "D"];
+
+function showQuestion() {
+  answered = false;
+  const item = questions[current];
+
+  document.getElementById("progress").textContent =
+    `السؤال ${current + 1} من ${questions.length}`;
+
+  document.getElementById("score").textContent = `النتيجة: ${score}`;
+
+  document.getElementById("progressFill").style.width =
+    `${(current / questions.length) * 100}%`;
+
+  document.getElementById("question").textContent = item.q;
+  document.getElementById("message").textContent = "";
+
+  const next = document.getElementById("next");
+  next.style.display = "none";
+  next.textContent = current === questions.length - 1
+    ? "عرض النتيجة ←"
+    : "السؤال التالي ←";
+
+  const box = document.getElementById("options");
+  box.innerHTML = "";
+
+  item.options.forEach((option, index) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "option";
+
+    const letter = document.createElement("span");
+    letter.className = "letter";
+    letter.textContent = letters[index];
+
+    const text = document.createElement("span");
+    text.textContent = option;
+    text.style.whiteSpace = "pre-line";
+
+    button.append(letter, text);
+    button.onclick = () => checkAnswer(index);
+    box.appendChild(button);
+  });
+}
+
+function checkAnswer(index) {
+  if (answered) return;
+  answered = true;
+
+  const item = questions[current];
+  const buttons = document.querySelectorAll(".option");
+  const message = document.getElementById("message");
+
+  if (index === item.answer) {
+    score++;
+    message.textContent = "✓ إجابة صحيحة! أحسنت";
+    message.style.color = "#4ade80";
+  } else {
+    message.textContent =
+      "✕ إجابة غير صحيحة — الإجابة الصحيحة مميزة باللون الأخضر";
+    message.style.color = "#f87171";
+  }
+
+  buttons.forEach((button, i) => {
+    button.disabled = true;
+    if (i === item.answer) {
+      button.classList.add("correct");
+    } else if (i === index) {
+      button.classList.add("wrong");
     }
+  });
 
-    function checkAnswer(index) {
-      if (answered) return;
+  document.getElementById("score").textContent = `النتيجة: ${score}`;
+  document.getElementById("next").style.display = "block";
+}
 
-      const item = questions[current];
-      const message = document.getElementById("message");
+function nextQuestion() {
+  if (!answered) return;
 
-      if (index === item.answer) {
-        answered = true;
-        score++;
-        message.textContent = "✅ إجابة صحيحة!";
-        message.style.color = "green";
+  current++;
 
-        if (current === questions.length - 1) {
-          document.getElementById("next").textContent =
-            "عرض النتيجة";
-        } else {
-          document.getElementById("next").textContent =
-            "السؤال التالي";
-        }
-
-        document.getElementById("next").style.display = "inline-block";
-      } else {
-        message.textContent = "❌ إجابة غلط، حاول تاني.";
-        message.style.color = "red";
-      }
-    }
-
-    function nextQuestion() {
-      if (!answered) return;
-
-      current++;
-
-      if (current < questions.length) {
-        showQuestion();
-      } else {
-        document.querySelector(".quiz").innerHTML = `
-          <h1>انتهى الاختبار 🎉</h1>
-          <h2>نتيجتك: ${score} من ${questions.length}</h2>
-          <button class="option" onclick="location.reload()">
-            إعادة الاختبار
-          </button>
-        `;
-      }
-    }
-
+  if (current < questions.length) {
     showQuestion();
-  </script>
+  } else {
+    showResult();
+  }
+}
+
+function showResult() {
+  const percentage = Math.round((score / questions.length) * 100);
+  let icon = "💪";
+  let message = "استمر في التدريب، وهتتحسن مع كل محاولة!";
+
+  if (percentage === 100) {
+    icon = "🏆";
+    message = "ممتاز! جبت الدرجة النهائية، برافو!";
+  } else if (percentage >= 75) {
+    icon = "🎉";
+    message = "شغل ممتاز! نتيجتك قوية جدًا.";
+  } else if (percentage >= 50) {
+    icon = "👏";
+    message = "كويس! راجع الأسئلة وحاول تاني.";
+  }
+
+  document.getElementById("quiz").innerHTML = `
+    <section class="result">
+      <div class="result-icon">${icon}</div>
+      <h1>انتهى الاختبار!</h1>
+      <p>${message}</p>
+      <div class="result-score">${score} / ${questions.length}</div>
+      <p>نسبتك: ${percentage}%</p>
+      <button class="next" type="button" onclick="location.reload()">
+        إعادة الاختبار ↻
+      </button>
+    </section>
+    <footer class="footer">اختبار تفاعلي • استمر في التعلّم 🚀</footer>
+  `;
+}
+
+showQuestion();
+</script>
 </body>
 </html>
