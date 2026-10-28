@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>موقع الاختبارات</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #080808;
+      color:#ffffff;
+      margin: 0;
+      padding: 30px 15px;
+    }
+    .quiz {
+      max-width: 550px;
+      margin: auto;
+      background: #171717;
+      color:ffffff;
+      padding: 25px;
+      border-radius: 16px;
+      border: 1xp solid #333333;
+      box-shadow: 0 4px 15px #00000066;
+    }
+    h1 { color: #60a5fa; }
+    .option {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      margin: 10px 0;
+      border: 1px solid #444444;
+      border-radius: 9px;
+      background: #252525;
+      color: #ffffff;
+      cursor: pointer;
+      text-align: right;
+      font-size: 17px;
+    }
+    .option:hover { background: #333333; }
+    #message { font-weight: bold; }
+    #next {
+      display: none;
+      padding: 12px 22px;
+      background: #175cd3;
+      color: white;
+      border: 0;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz">
+    <h1>اختبارك</h1>
+    <p id="progress"></p>
+    <h3 id="question"></h3>
+    <div id="options"></div>
+    <p id="message"></p>
+    <button id="next" onclick="nextQuestion()">
+      السؤال التالي
+    </button>
+  </div>
+
+  <script>
+    // أضف أسئلتك هنا
+    const questions = [
+      {
+        q: ".... is the physical aspect of the compter that can be seen.",
+        options: ["Softwaer", "Hardware", "operating system", "Application program"],
+        answer: 1
+      },
+      {
+        q: ".... is the brain of a computer",
+        options: ["Hardware", "Memory", "CPU", "Disk"],
+        answer: 2
+      },
+      {
+        q: "Why do computer use zeros and ones?",
+        options: ["becaus combinations of zeros and ones can represent any numbers and characters", "because binary numbers are simplest", "because digital devices have two stable states and it is natural to use one state for 0 and the other for 1", "0"],
+        answer: 2
+      }
+    ];
+
+    let current = 0;
+    let score = 0;
+    let answered = false;
+
+    function showQuestion() {
+      answered = false;
+      document.getElementById("message").textContent = "";
+      document.getElementById("next").style.display = "none";
+      document.getElementById("progress").textContent =
+        `السؤال ${current + 1} من ${questions.length}`;
+
+      const item = questions[current];
+      document.getElementById("question").textContent = item.q;
+      const box = document.getElementById("options");
+      box.innerHTML = "";
+
+      item.options.forEach((option, index) => {
+        const button = document.createElement("button");
+        button.className = "option";
+        button.textContent = option;
+        button.onclick = () => checkAnswer(index);
+        box.appendChild(button);
+      });
+    }
+
+    function checkAnswer(index) {
+      if (answered) return;
+
+      const item = questions[current];
+      const message = document.getElementById("message");
+
+      if (index === item.answer) {
+        answered = true;
+        score++;
+        message.textContent = "✅ إجابة صحيحة!";
+        message.style.color = "green";
+
+        if (current === questions.length - 1) {
+          document.getElementById("next").textContent =
+            "عرض النتيجة";
+        } else {
+          document.getElementById("next").textContent =
+            "السؤال التالي";
+        }
+
+        document.getElementById("next").style.display = "inline-block";
+      } else {
+        message.textContent = "❌ إجابة غلط، حاول تاني.";
+        message.style.color = "red";
+      }
+    }
+
+    function nextQuestion() {
+      if (!answered) return;
+
+      current++;
+
+      if (current < questions.length) {
+        showQuestion();
+      } else {
+        document.querySelector(".quiz").innerHTML = `
+          <h1>انتهى الاختبار 🎉</h1>
+          <h2>نتيجتك: ${score} من ${questions.length}</h2>
+          <button class="option" onclick="location.reload()">
+            إعادة الاختبار
+          </button>
+        `;
+      }
+    }
+
+    showQuestion();
+  </script>
+</body>
+</html>
