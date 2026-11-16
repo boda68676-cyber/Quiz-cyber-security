@@ -129,112 +129,527 @@ h1{font-size:clamp(23px,5vw,30px);margin:0 0 8px;color:#fff}
 
 <script>
 const questions = [
+
+  // ===== Basic Sets Theory (1 - 20) =====
+
   {
-    q: "What is free fall?",
+    q: "Which of the following is a finite set?",
     options: [
-      "The motion of an object under the influence of gravity alone",
-      "The motion of an object under friction alone",
-      "The motion of an object at a constant speed only",
-      "The motion of an object in the horizontal direction only"
+      "{1, 2, 3, ...}",
+      "{x | x is an odd number less than 10}",
+      "N = {1, 2, 3, ...}",
+      "The set of all integers"
+    ],
+    answer: 1
+  },
+  {
+    q: "What does the symbol ∅ represent in set theory?",
+    options: [
+      "Null set",
+      "Universal set",
+      "Finite set",
+      "Infinite set"
     ],
     answer: 0
   },
   {
-    q: "What symbol is used to represent the acceleration due to gravity?",
-    options: ["v", "g", "t", "y"],
+    q: "If A = {2, 4, 6} and B = {4, 6, 8}, what is A ∩ B?",
+    options: [
+      "{2, 4, 6, 8}",
+      "{4, 6}",
+      "{2, 8}",
+      "∅"
+    ],
     answer: 1
   },
   {
-    q: "What is the approximate value of gravitational acceleration near Earth's surface?",
+    q: "Which of the following is an example of an infinite set?",
     options: [
-      "4.9 m/s²",
-      "19.6 m/s²",
-      "9.8 m/s²",
-      "98 m/s²"
+      "{2, 3, 5, 7}",
+      "N = {1, 2, 3, ...}",
+      "{a, b, c, d}",
+      "{1, 2, 3, 4}"
+    ],
+    answer: 1
+  },
+  {
+    q: "The set of all positive integers is denoted as:",
+    options: [
+      "N",
+      "Z",
+      "R",
+      "Q"
+    ],
+    answer: 0
+  },
+  {
+    q: "What is the power set of A = {1, 2}?",
+    options: [
+      "{{1}, {2}}",
+      "{∅, {1}, {2}, {1, 2}}",
+      "{{1, 2, 3}}",
+      "{1, 2, 3}"
+    ],
+    answer: 1
+  },
+  {
+    q: "Which statement about the universal set is true?",
+    options: [
+      "It contains all elements of interest",
+      "It is always an empty set",
+      "It contains only finite elements",
+      "It is the complement of a set"
+    ],
+    answer: 0
+  },
+  {
+    q: "If A = {1, 2, 3} and B = {4, 5}, what is A ∪ B?",
+    options: [
+      "{1, 2, 3}",
+      "{4, 5}",
+      "{1, 2, 3, 4, 5}",
+      "∅"
     ],
     answer: 2
   },
   {
-    q: "If the positive y-axis is chosen upward, the acceleration due to gravity is:",
-    options: ["+g", "-g", "Always zero", "2g"],
-    answer: 1
-  },
-  {
-    q: "If the positive y-axis is chosen downward, the acceleration due to gravity is:",
-    options: ["-g", "Zero", "+g", "-2g"],
-    answer: 2
-  },
-  {
-    q: "What is the direction of gravitational acceleration near Earth's surface?",
+    q: "Which of the following is a subset of Z (integers)?",
     options: [
-      "Always upward",
-      "Always downward",
-      "Always horizontal",
-      "It depends on the object's velocity"
+      "Natural numbers",
+      "Irrational numbers",
+      "All real numbers",
+      "Complex numbers"
+    ],
+    answer: 0
+  },
+  {
+    q: "A = {x | x is a positive even integer ≤ 10}. What is A?",
+    options: [
+      "{1, 3, 5, 7, 9}",
+      "{2, 4, 6, 8, 10}",
+      "{2, 4, 6, 8}",
+      "{2, 4, 6}"
     ],
     answer: 1
   },
   {
-    q: "A ball is dropped from rest. How far does it fall in 2 seconds?",
+    q: "The objects contained in a set are called:",
     options: [
-      "9.8 m",
-      "19.6 m",
-      "39.2 m",
-      "4.9 m"
+      "Matrices",
+      "Elements",
+      "Variables",
+      "Coordinates"
     ],
     answer: 1
   },
   {
-    q: "A ball falls 15 m from rest. What is its speed at that point approximately?",
+    q: "Which symbol means that an element belongs to a set?",
     options: [
-      "9.8 m/s",
-      "12.0 m/s",
-      "17.1 m/s",
-      "29.4 m/s"
-    ],
-    answer: 2
-  },
-  {
-    q: "An object is dropped from rest and falls 25 m. Approximately how long does it take?",
-    options: [
-      "1.0 s",
-      "2.26 s",
-      "3.0 s",
-      "4.9 s"
+      "∉",
+      "∈",
+      "⊆",
+      "∪"
     ],
     answer: 1
   },
   {
-    q: "An object falls from rest. How long does it take to reach a speed of 29.4 m/s?",
+    q: "A set that contains only one element is called:",
     options: [
-      "1 s",
-      "2 s",
-      "3 s",
-      "4 s"
+      "Empty set",
+      "Infinite set",
+      "Singleton set",
+      "Universal set"
     ],
     answer: 2
   },
   {
-    q: "A ball is thrown vertically upward with an initial speed of 15 m/s. How long does it take to return to the release point?",
+    q: "Two sets are equal if they have:",
     options: [
-      "1.53 s",
-      "3.06 s",
-      "4.59 s",
-      "0.65 s"
+      "The same number of elements only",
+      "The same elements",
+      "Different elements",
+      "No common elements"
     ],
     answer: 1
   },
   {
-    q: "A ball is thrown vertically upward with an initial speed of 12 m/s. How long does it take to reach its maximum height?",
+    q: "If A = {2, 3, 4} and B = {4, 5, 6}, find A - B.",
     options: [
-      "0.82 s",
-      "1.22 s",
-      "2.45 s",
-      "9.8 s"
+      "{4}",
+      "{5, 6}",
+      "{2, 3}",
+      "{2, 3, 4, 5, 6}"
+    ],
+    answer: 2
+  },
+  {
+    q: "If U = {1, 2, 3, 4, 5, 6} and A = {1, 2, 3}, what is A'?",
+    options: [
+      "{1, 2, 3}",
+      "{4, 5, 6}",
+      "∅",
+      "U"
     ],
     answer: 1
+  },
+  {
+    q: "If n(A) = 7, n(B) = 5, and n(A ∩ B) = 2, find n(A ∪ B).",
+    options: [
+      "10",
+      "12",
+      "14",
+      "7"
+    ],
+    answer: 0
+  },
+  {
+    q: "If A = {1, 3, 5, 7} and B = {3, 7, 9}, find A ∩ B.",
+    options: [
+      "{1, 5, 9}",
+      "{3, 7}",
+      "{1, 3, 5, 7, 9}",
+      "∅"
+    ],
+    answer: 1
+  },
+  {
+    q: "If C = {x | x is an even number ≤ 10}, which is C?",
+    options: [
+      "{0, 2, 4, 6, 8}",
+      "{2, 4, 6, 8, 10}",
+      "{1, 2, 3, 4, 5}",
+      "{2, 4, 6}"
+    ],
+    answer: 1
+  },
+  {
+    q: "If D = {1, 2, 3, 4, 5} and U = {1, 2, 3, 4, 5, 6, 7, 8}, find D'.",
+    options: [
+      "{1, 2, 3}",
+      "{6, 7, 8}",
+      "{4, 5, 6}",
+      "∅"
+    ],
+    answer: 1
+  },
+  {
+    q: "If A = {1, 2, 3} and B = {1, 2, 3, 4, 5}, which statement is true?",
+    options: [
+      "A ⊆ B",
+      "B ⊆ A",
+      "A ∩ B = ∅",
+      "A = ∅"
+    ],
+    answer: 0
+  },
+
+  // ===== Linear Equations (21 - 40) =====
+
+  {
+    q: "Which of the following is a linear equation in one variable?",
+    options: [
+      "2x + 5y = 7",
+      "4x + 9 = 2",
+      "y² - 4 = 0",
+      "5x³ + 2 = 5"
+    ],
+    answer: 1
+  },
+  {
+    q: "What is the degree of a linear equation?",
+    options: [
+      "0",
+      "1",
+      "2",
+      "3"
+    ],
+    answer: 1
+  },
+  {
+    q: "Which represents the standard form of a linear equation in two variables?",
+    options: [
+      "y = mx + b",
+      "Ax + By = C",
+      "Ax + B = 0",
+      "5x² + y = 5"
+    ],
+    answer: 1
+  },
+  {
+    q: "What does the graph of a linear equation in two variables look like?",
+    options: [
+      "A curve",
+      "A straight line",
+      "A circle",
+      "A parabola"
+    ],
+    answer: 1
+  },
+  {
+    q: "Solve 3x + 6 = 18. What is the value of x?",
+    options: [
+      "4",
+      "3",
+      "6",
+      "2"
+    ],
+    answer: 0
+  },
+  {
+    q: "Which of the following is the solution of 6x - 3 = 15?",
+    options: [
+      "x = 3",
+      "x = 5",
+      "x = 2",
+      "x = 1"
+    ],
+    answer: 0
+  },
+  {
+    q: "The sum of two numbers is 50. One number is 10 more than the other. What are the numbers?",
+    options: [
+      "20 and 30",
+      "15 and 35",
+      "25 and 25",
+      "10 and 40"
+    ],
+    answer: 0
+  },
+  {
+    q: "Which method involves solving one variable in terms of another and substituting it into the other equation?",
+    options: [
+      "Substitution method",
+      "Elimination method",
+      "Graphical method",
+      "Cross multiplication method"
+    ],
+    answer: 0
+  },
+  {
+    q: "Solve x - y = 12 and 2x + y = 22.",
+    options: [
+      "x = 10, y = -2",
+      "x = 34, y = -2",
+      "x = 34/3, y = -2/3",
+      "x = 22, y = 12"
+    ],
+    answer: 2
+  },
+  {
+    q: "What is the solution of 2x + 3y = 11 and 3x + 2y = 9?",
+    options: [
+      "x = 1, y = 3",
+      "x = 2, y = 1",
+      "x = 1, y = 2",
+      "x = 0, y = 0"
+    ],
+    answer: 2
+  },
+  {
+    q: "A linear equation is an equation whose highest variable power is:",
+    options: [
+      "0",
+      "1",
+      "2",
+      "3"
+    ],
+    answer: 1
+  },
+  {
+    q: "The standard form of a linear equation in one variable is:",
+    options: [
+      "Ax + By = C",
+      "Ax + B = 0",
+      "y = mx + b",
+      "xy = 0"
+    ],
+    answer: 1
+  },
+  {
+    q: "The slope-intercept form of a linear equation is:",
+    options: [
+      "Ax + By = C",
+      "Ax + B = 0",
+      "y = mx + b",
+      "x = y²"
+    ],
+    answer: 2
+  },
+  {
+    q: "The graph of x = 4 is:",
+    options: [
+      "A horizontal line",
+      "A vertical line",
+      "A circle",
+      "A parabola"
+    ],
+    answer: 1
+  },
+  {
+    q: "For x - 2y = 2, the equivalent slope-intercept form is:",
+    options: [
+      "y = 2x - 1",
+      "y = x/2 - 1",
+      "y = x - 2",
+      "y = -x/2 + 1"
+    ],
+    answer: 1
+  },
+  {
+    q: "Solve 3x - 2 = 4.",
+    options: [
+      "x = 1",
+      "x = 2",
+      "x = 3",
+      "x = 4"
+    ],
+    answer: 1
+  },
+  {
+    q: "Solve 5x - 95 = 75.",
+    options: [
+      "x = 17",
+      "x = 34",
+      "x = 35",
+      "x = 19"
+    ],
+    answer: 1
+  },
+  {
+    q: "Six times a number equals 48. What is the number?",
+    options: [
+      "6",
+      "7",
+      "8",
+      "9"
+    ],
+    answer: 2
+  },
+  {
+    q: "How many independent equations are needed to find a particular solution for two unknowns?",
+    options: [
+      "One",
+      "Two",
+      "Three",
+      "Four"
+    ],
+    answer: 1
+  },
+  {
+    q: "Which method cancels one variable by adding or subtracting equations?",
+    options: [
+      "Substitution method",
+      "Elimination method",
+      "Graphical method",
+      "Set-builder method"
+    ],
+    answer: 1
+  },
+
+  // ===== Matrices (41 - 50) =====
+
+  {
+    q: "A matrix is best described as:",
+    options: [
+      "A circular arrangement of numbers",
+      "A rectangular array of numbers in rows and columns",
+      "A single equation",
+      "A set with no elements"
+    ],
+    answer: 1
+  },
+  {
+    q: "The numbers inside a matrix are called:",
+    options: [
+      "Variables only",
+      "Elements or entries",
+      "Rows",
+      "Scalars only"
+    ],
+    answer: 1
+  },
+  {
+    q: "A matrix with 2 rows and 3 columns has dimensions:",
+    options: [
+      "3 × 2",
+      "2 × 3",
+      "2 × 2",
+      "3 × 3"
+    ],
+    answer: 1
+  },
+  {
+    q: "In a 2 × 3 matrix, the number of rows is:",
+    options: [
+      "2",
+      "3",
+      "5",
+      "6"
+    ],
+    answer: 0
+  },
+  {
+    q: "Two matrices can be added only when they have:",
+    options: [
+      "The same number of rows and columns",
+      "The same entries",
+      "A different number of rows",
+      "A total of 3 columns"
+    ],
+    answer: 0
+  },
+  {
+    q: "To add two matrices, you add:",
+    options: [
+      "All entries into one total",
+      "Entries in matching positions",
+      "Rows only",
+      "Columns only"
+    ],
+    answer: 1
+  },
+  {
+    q: "Can a 3 × 5 matrix be added to another 3 × 5 matrix?",
+    options: [
+      "Yes",
+      "No",
+      "Only if all entries match",
+      "Only if both are square"
+    ],
+    answer: 0
+  },
+  {
+    q: "Can a 3 × 5 matrix be added to a 3 × 4 matrix?",
+    options: [
+      "Yes",
+      "No",
+      "Only after multiplication",
+      "Only if entries are positive"
+    ],
+    answer: 1
+  },
+  {
+    q: "To subtract two matrices, you subtract:",
+    options: [
+      "Matching-position entries",
+      "The row numbers",
+      "The column numbers",
+      "Their dimensions"
+    ],
+    answer: 0
+  },
+  {
+    q: "What is scalar multiplication of a matrix?",
+    options: [
+      "Multiplying every matrix entry by a constant",
+      "Adding a row to a column",
+      "Changing the matrix dimensions",
+      "Transposing a matrix"
+    ],
+    answer: 0
   }
-];
+
+];ز
 
 let current = 0;
 let score = 0;
